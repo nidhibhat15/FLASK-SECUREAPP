@@ -68,8 +68,7 @@ secure-dashboard/
 ├── static/ # CSS, JS, static assets
 └── run.py # Entry point
 
-pgsql
-Copy code
+
 
 This **modular structure** allows features to evolve independently while keeping the code clean.  
 
