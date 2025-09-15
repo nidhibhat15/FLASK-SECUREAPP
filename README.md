@@ -23,7 +23,7 @@ This project showcases:
 - [Setup & Installation](#-setup--installation)
 - [Key Learnings](#-key-learnings)
 - [Demo](#-demo)
-- [License](#-license)
+
 
 ---
 
