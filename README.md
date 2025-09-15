@@ -22,7 +22,6 @@ This project showcases:
 5. [Setup & Installation](#️-setup--installation)
 6. [Key Learnings](#-key-learnings)
 7. [Demo](#-demo)
-8. [License](#-license)
 
 ---
 
