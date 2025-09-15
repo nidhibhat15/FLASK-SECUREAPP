@@ -69,61 +69,70 @@ secure-dashboard/
 ├── static/ # CSS, JS, static assets
 └── run.py # Entry point
 
+pgsql
+Copy code
 
 This **modular structure** allows features to evolve independently while keeping the code clean.  
 
-*(You can also include your architecture diagram here)*  
-```markdown
-![Architecture Diagram](assets/architecture.png)
+*(CHECK OUT THE ARCHITECTURE DIAGRAM AT architecture/arch_diagram.png )*  
+![Architecture Diagram](architecture/arch_diagram.png)
 
-✨ Features
-🔐 User Authentication & Logout
+---
 
-Handled by Flask-Login.
-Users log in and receive a secure session cookie containing a signed user ID.
-The cookie allows the app to remember the user across requests without repeated logins.
+## ✨ Features
 
-Logout:
+### 🔐 User Authentication & Logout
+- Handled by **Flask-Login**.  
+- Users log in and receive a **secure session cookie** containing a signed user ID.  
+- The cookie allows the app to remember the user across requests without repeated logins.  
 
-Dedicated route calls logout_user() from Flask-Login.
-Clears session cookie, revoking access to protected routes.
+**Logout:**  
+- Dedicated route calls `logout_user()` from Flask-Login.  
+- Clears session cookie, revoking access to protected routes.  
 
-📨 Secure Messaging
+---
 
-Users can send encrypted messages to registered users.
-Sending a Message:
+### 📨 Secure Messaging
+Users can send **encrypted messages** to registered users.  
 
-Compose message and select a recipient.
-Flask backend converts message to bytes and encrypts it with the master Fernet key.
-Encrypted message stored as a BLOB in the database with sender & recipient IDs.
+**Sending a Message:**  
+1. Compose message and select a recipient.  
+2. Flask backend converts message to bytes and encrypts it with the **master Fernet key**.  
+3. Encrypted message stored as a **BLOB** in the database with sender & recipient IDs.  
 
-Receiving a Message:
+**Receiving a Message:**  
+1. Flask queries messages addressed to the user.  
+2. Each encrypted BLOB is decrypted using the **same master key**.  
+3. Decrypted message rendered on the dashboard.  
 
-Flask queries messages addressed to the user.
-Each encrypted BLOB is decrypted using the same master key.
-Decrypted message rendered on the dashboard.
+✅ Messages are always stored encrypted in the database.  
 
-✅ Messages are always stored encrypted in the database.
+---
 
-🗄 Encrypted File Vault (In Progress)
+### 🗄 Encrypted File Vault (In Progress)
+Provides a secure space for file uploads and downloads.  
 
-Provides a secure space for file uploads and downloads.
-Upload & Encryption (Completed):
-File uploaded by user.
-Flask encrypts file binary data using the master Fernet key.
-Encrypted file saved in uploads folder.
-Metadata (filename, size) stored in database.
-Download & Decryption (Planned):
-Server will retrieve encrypted file.
-Decrypt using master key.
-Stream original file to user.
+**Upload & Encryption (Completed):**  
+- File uploaded by user.  
+- Flask encrypts file binary data using the **master Fernet key**.  
+- Encrypted file saved in uploads folder.  
+- Metadata (filename, size) stored in database.  
 
-⚙️ Setup & Installation
+**Download & Decryption (Planned):**  
+- Server will retrieve encrypted file.  
+- Decrypt using master key.  
+- Stream original file to user.  
 
-Clone the repository:
+---
 
+## ⚙️ Setup & Installation
+
+**Clone the repository:**
+```bash
 git clone https://github.com/yourusername/secure-dashboard.git
 cd secure-dashboard
+
+---
 
 Create virtual environment & install dependencies:
 
@@ -131,10 +140,10 @@ python -m venv venv
 venv\Scripts\activate   # Windows
 pip install -r requirements.txt
 
-
 Configure environment variables & database:
+
 Copy .env.example to .env and configure secrets (Fernet key, DB URI, etc.)
-Initialize the database if not already created
+Initialize the database if not already created.
 
 Run the application:
 python run.py
@@ -149,5 +158,8 @@ Database schema management using Flask-Migrate
 
 🎥 Demo
 
-Project presented during Reverse KT session
-Session recorded and available for review
+Project presented during Reverse KT session.
+Session recorded and available for review.
+
+
+
