@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Encrypt / Decrypt{% endblock %}
+
+{% block content %}
+<div class="card mx-auto p-4" style="max-width:800px;">
+  <h3 class="mb-3">Encrypt a message</h3>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.recipient.label }}
+      {{ form.recipient(class_='form-select') }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.message.label }}
+      {{ form.message(class_='form-control', rows=4) }}
+    </div>
+
+    {{ form.submit(class_='btn btn-warning w-100') }}
+  </form>
+
+  <hr/>
+
+  <h3 class="mb-3">Decrypt a token</h3>
+  <form method="POST" action="{{ url_for('main.decrypt') }}">
+    <div class="mb-3">
+      <label>Token</label>
+      <input name="token" class="form-control"/>
+    </div>
+    <button class="btn btn-dark w-100">Decrypt</button>
+  </form>
+</div>
+{% endblock %}

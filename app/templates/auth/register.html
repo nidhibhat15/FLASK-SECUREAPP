@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="card mx-auto p-4" style="max-width:600px;">
+  <h3 class="mb-3">Create account</h3>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.username.label }}{{ form.username(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.password.label }}{{ form.password(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.confirm_password.label }}{{ form.confirm_password(class_='form-control') }}</div>
+    {{ form.submit(class_='btn btn-primary w-100') }}
+  </form>
+</div>
+{% endblock %}

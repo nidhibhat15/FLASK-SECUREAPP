@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Compose{% endblock %}
+{% block content %}
+<div class="card mx-auto p-4" style="max-width:700px;">
+  <h3>Compose</h3>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.recipient.label }}{{ form.recipient(class_='form-select') }}</div>
+    <div class="mb-3">{{ form.message.label }}{{ form.message(class_='form-control', rows=4) }}</div>
+    <div class="form-check mb-3">{{ form.one_time() }} {{ form.one_time.label }}</div>
+    <div class="mb-3">{{ form.ttl.label }}{{ form.ttl(class_='form-control') }}</div>
+    {{ form.submit(class_='btn btn-primary') }}
+  </form>
+</div>
+{% endblock %}

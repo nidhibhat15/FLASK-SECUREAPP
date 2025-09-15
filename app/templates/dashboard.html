@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card p-3">
+      <h4>Welcome, {{ current_user.username }}</h4>
+      <p class="text-muted">Encrypted messages in your inbox:</p>
+      {% if messages %}
+        <ul class="list-group">
+          {% for m in messages %}
+            <li class="list-group-item">
+              <div><small class="text-muted">{{ m.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</small></div>
+              <div>From: {{ m.sender.username if m.sender else 'System' }}</div>
+              <div>Encrypted token: <code>{{ m.token }}</code></div>
+              <div>Decrypted: <strong>{{ m.plaintext }}</strong></div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">No messages yet — go to Compose.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card p-3">
+      <h5>Actions</h5>
+      <a class="btn btn-warning w-100 mb-2" href="{{ url_for('main.encrypt') }}">Encrypt Self-Note</a>
+      <a class="btn btn-dark w-100" href="{{ url_for('files.vault') }}">View Vault</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+body { background: linear-gradient(180deg,#f3f6fb,#ffffff); }
+.card { border-radius: 1rem; box-shadow: 0 10px 30px rgba(20,30,50,0.06); }
+pre { font-size: 0.85rem; }
