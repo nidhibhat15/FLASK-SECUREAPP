@@ -12,17 +12,17 @@ This project showcases:
 ---
 
 ## 📑 Table of Contents
-1. [Overview](#overview)
-2. [Tech Stack](#tech-stack)
-3. [Architecture](#architecture)
-4. [Features](#features)
-   - [User Authentication & Logout](#user-authentication--logout)
-   - [Secure Messaging](#secure-messaging)
-   - [Encrypted File Vault (In Progress)](#encrypted-file-vault-in-progress)
-5. [Setup & Installation](#setup--installation)
-6. [Key Learnings](#key-learnings)
-7. [Demo](#demo)
-8. [License](#license)
+1. [Overview](#-overview)
+2. [Tech Stack](#-tech-stack)
+3. [Architecture](#-architecture)
+4. [Features](#-features)
+   - [User Authentication & Logout](#-user-authentication--logout)
+   - [Secure Messaging](#-secure-messaging)
+   - [Encrypted File Vault (In Progress)](#-encrypted-file-vault-in-progress)
+5. [Setup & Installation](#️-setup--installation)
+6. [Key Learnings](#-key-learnings)
+7. [Demo](#-demo)
+8. [License](#-license)
 
 ---
 
@@ -44,19 +44,19 @@ The application is designed with three main layers:
 
 ## 🛠 Tech Stack
 
-| Layer         | Tools / Libraries                                |
-|---------------|-------------------------------------------------|
-| **Backend**   | Python, Flask, Flask-Login, Flask-Bcrypt, Flask-Migrate |
-| **Database**  | SQLite with SQLAlchemy ORM                      |
-| **Frontend**  | HTML, CSS, Bootstrap                             |
-| **Encryption**| Fernet (from `cryptography` library)            |
-| **Architecture** | Flask Blueprints for modularity              |
+| Layer           | Tools / Libraries                                   |
+|-----------------|----------------------------------------------------|
+| **Backend**     | Python, Flask, Flask-Login, Flask-Bcrypt, Flask-Migrate |
+| **Database**    | SQLite with SQLAlchemy ORM                          |
+| **Frontend**    | HTML, CSS, Bootstrap                                |
+| **Encryption**  | Fernet (from `cryptography` library)                |
+| **Architecture**| Flask Blueprints for modularity                     |
 
 ---
 
 ## 🏗 Architecture
 
-The folder structure:  
+Folder structure:  
 
 secure-dashboard/
 │
@@ -72,68 +72,65 @@ secure-dashboard/
 
 This **modular structure** allows features to evolve independently while keeping the code clean.  
 
----
+*(You can also include your architecture diagram here)*  
+```markdown
+![Architecture Diagram](assets/architecture.png)
 
-## ✨ Features
+✨ Features
+🔐 User Authentication & Logout
 
-### 🔐 User Authentication & Logout
+Handled by Flask-Login.
+Users log in and receive a secure session cookie containing a signed user ID.
+The cookie allows the app to remember the user across requests without repeated logins.
 
-- Handled by **Flask-Login**.  
-- Users log in and receive a **secure session cookie** containing a signed user ID.  
-- The cookie allows the app to remember the user across requests without repeated logins.  
+Logout:
 
-**Logout:**  
-- Dedicated route calls `logout_user()` from Flask-Login.  
-- Clears session cookie, revoking access to protected routes.  
+Dedicated route calls logout_user() from Flask-Login.
+Clears session cookie, revoking access to protected routes.
 
----
+📨 Secure Messaging
 
-### 📨 Secure Messaging
+Users can send encrypted messages to registered users.
+Sending a Message:
 
-Users can send **encrypted messages** to registered users.  
+Compose message and select a recipient.
+Flask backend converts message to bytes and encrypts it with the master Fernet key.
+Encrypted message stored as a BLOB in the database with sender & recipient IDs.
 
-**Sending a Message:**  
-1. Compose message and select a recipient.  
-2. Flask backend converts message to bytes and encrypts it with the **master Fernet key**.  
-3. Encrypted message stored as a **BLOB** in the database with sender & recipient IDs.  
+Receiving a Message:
 
-**Receiving a Message:**  
-1. Flask queries messages addressed to the user.  
-2. Each encrypted BLOB is decrypted using the **same master key**.  
-3. Decrypted message rendered on the dashboard.  
+Flask queries messages addressed to the user.
+Each encrypted BLOB is decrypted using the same master key.
+Decrypted message rendered on the dashboard.
 
-✅ Messages are always stored encrypted in the database.  
+✅ Messages are always stored encrypted in the database.
 
----
+🗄 Encrypted File Vault (In Progress)
 
-### 🗄 Encrypted File Vault (In Progress)
+Provides a secure space for file uploads and downloads.
+Upload & Encryption (Completed):
+File uploaded by user.
+Flask encrypts file binary data using the master Fernet key.
+Encrypted file saved in uploads folder.
+Metadata (filename, size) stored in database.
+Download & Decryption (Planned):
+Server will retrieve encrypted file.
+Decrypt using master key.
+Stream original file to user.
 
-Provides a secure space for file uploads and downloads.  
+⚙️ Setup & Installation
 
-**Upload & Encryption (Completed):**  
-- File uploaded by user.  
-- Flask encrypts file binary data using the **master Fernet key**.  
-- Encrypted file saved in uploads folder.  
-- Metadata (filename, size) stored in database.  
+Clone the repository:
 
-**Download & Decryption (Planned):**  
-- Server will retrieve encrypted file.  
-- Decrypt using master key.  
-- Stream original file to user.  
-
----
-
-## ⚙️ Setup & Installation
-
-1. **Clone the repository:**  
-```bash
 git clone https://github.com/yourusername/secure-dashboard.git
 cd secure-dashboard
 
 Create virtual environment & install dependencies:
+
 python -m venv venv
 venv\Scripts\activate   # Windows
 pip install -r requirements.txt
+
 
 Configure environment variables & database:
 Copy .env.example to .env and configure secrets (Fernet key, DB URI, etc.)
@@ -142,16 +139,12 @@ Initialize the database if not already created
 Run the application:
 python run.py
 
-### Key learnings
+🧠 Key Learnings
 
 Strong password hashing with Flask-Bcrypt
-
 Secure session management with Flask-Login
-
 Safe storage & retrieval of encrypted messages & files
-
 Modular Flask apps using Blueprints
-
 Database schema management using Flask-Migrate
 
 🎥 Demo
